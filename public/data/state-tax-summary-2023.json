@@ -3,12 +3,12 @@
     "year": 2023,
     "currency": "USD",
     "scope": "state+local",
-    "topN": 20,
+    "topN": 50,
     "notes": [
       "Nominal dollars.",
       "Top states selected by population for the same year."
     ],
-    "generatedAt": "2026-02-14T17:59:01.828Z"
+    "generatedAt": "2026-02-27T18:02:23.175Z"
   },
   "taxTypes": [
     {
@@ -263,6 +263,21 @@
       "perCapitaTotal": 8.17
     },
     {
+      "state": "Minnesota",
+      "population": 5737915,
+      "totalRevenue": 45095960,
+      "breakdown": {
+        "property": 10315813,
+        "sales_general": 8489268,
+        "sales_selective": 5197635,
+        "income_individual": 13978913,
+        "income_corporate": 4660098,
+        "licenses": 1806164,
+        "other": 648069
+      },
+      "perCapitaTotal": 7.86
+    },
+    {
       "state": "Indiana",
       "population": 6862199,
       "totalRevenue": 40924028,
@@ -276,6 +291,21 @@
         "other": 157808
       },
       "perCapitaTotal": 5.96
+    },
+    {
+      "state": "Colorado",
+      "population": 5877610,
+      "totalRevenue": 39838187,
+      "breakdown": {
+        "property": 13096698,
+        "sales_general": 11834133,
+        "sales_selective": 4055194,
+        "income_individual": 6780832,
+        "income_corporate": 2342073,
+        "licenses": 1216425,
+        "other": 512832
+      },
+      "perCapitaTotal": 6.78
     },
     {
       "state": "Arizona",
@@ -323,6 +353,21 @@
       "perCapitaTotal": 4.9
     },
     {
+      "state": "Connecticut",
+      "population": 3617176,
+      "totalRevenue": 34081652,
+      "breakdown": {
+        "property": 12019495,
+        "sales_general": 5548269,
+        "sales_selective": 3158712,
+        "income_individual": 8845425,
+        "income_corporate": 3499272,
+        "licenses": 487395,
+        "other": 523084
+      },
+      "perCapitaTotal": 9.42
+    },
+    {
       "state": "Missouri",
       "population": 6196156,
       "totalRevenue": 32741391,
@@ -336,6 +381,402 @@
         "other": 345321
       },
       "perCapitaTotal": 5.28
+    },
+    {
+      "state": "Oregon",
+      "population": 4233358,
+      "totalRevenue": 32320499,
+      "breakdown": {
+        "property": 8500636,
+        "sales_general": 1338529,
+        "sales_selective": 3651642,
+        "income_individual": 13664325,
+        "income_corporate": 1936969,
+        "licenses": 2305872,
+        "other": 922526
+      },
+      "perCapitaTotal": 7.63
+    },
+    {
+      "state": "Louisiana",
+      "population": 4573749,
+      "totalRevenue": 26918364,
+      "breakdown": {
+        "property": 4984220,
+        "sales_general": 10831225,
+        "sales_selective": 3376496,
+        "income_individual": 4678963,
+        "income_corporate": 1223914,
+        "licenses": 942351,
+        "other": 881195
+      },
+      "perCapitaTotal": 5.89
+    },
+    {
+      "state": "South Carolina",
+      "population": 5373555,
+      "totalRevenue": 26605010,
+      "breakdown": {
+        "property": 7952229,
+        "sales_general": 6703837,
+        "sales_selective": 2858112,
+        "income_individual": 5782274,
+        "income_corporate": 1356927,
+        "licenses": 1669999,
+        "other": 281632
+      },
+      "perCapitaTotal": 4.95
+    },
+    {
+      "state": "Alabama",
+      "population": 5108468,
+      "totalRevenue": 25229762,
+      "breakdown": {
+        "property": 3918533,
+        "sales_general": 8229342,
+        "sales_selective": 3963382,
+        "income_individual": 6062202,
+        "income_corporate": 1559734,
+        "licenses": 1303609,
+        "other": 192960
+      },
+      "perCapitaTotal": 4.94
+    },
+    {
+      "state": "Kentucky",
+      "population": 4526154,
+      "totalRevenue": 24688428,
+      "breakdown": {
+        "property": 4939587,
+        "sales_general": 5707759,
+        "sales_selective": 3556034,
+        "income_individual": 7979189,
+        "income_corporate": 1494837,
+        "licenses": 722344,
+        "other": 288678
+      },
+      "perCapitaTotal": 5.45
+    },
+    {
+      "state": "Oklahoma",
+      "population": 4053824,
+      "totalRevenue": 21487614,
+      "breakdown": {
+        "property": 4392661,
+        "sales_general": 6723624,
+        "sales_selective": 1922287,
+        "income_individual": 4393714,
+        "income_corporate": 774802,
+        "licenses": 1254631,
+        "other": 2025895
+      },
+      "perCapitaTotal": 5.3
+    },
+    {
+      "state": "Utah",
+      "population": 3417734,
+      "totalRevenue": 21319184,
+      "breakdown": {
+        "property": 4913632,
+        "sales_general": 6372862,
+        "sales_selective": 1920193,
+        "income_individual": 6497347,
+        "income_corporate": 866752,
+        "licenses": 580626,
+        "other": 167772
+      },
+      "perCapitaTotal": 6.24
+    },
+    {
+      "state": "Iowa",
+      "population": 3207004,
+      "totalRevenue": 20775471,
+      "breakdown": {
+        "property": 6706886,
+        "sales_general": 5198053,
+        "sales_selective": 1928515,
+        "income_individual": 4756448,
+        "income_corporate": 838062,
+        "licenses": 1226655,
+        "other": 120852
+      },
+      "perCapitaTotal": 6.48
+    },
+    {
+      "state": "Nevada",
+      "population": 3194176,
+      "totalRevenue": 20337354,
+      "breakdown": {
+        "property": 4491412,
+        "sales_general": 9206923,
+        "sales_selective": 4253827,
+        "licenses": 1338351,
+        "other": 1046841
+      },
+      "perCapitaTotal": 6.37
+    },
+    {
+      "state": "Kansas",
+      "population": 2940546,
+      "totalRevenue": 19458302,
+      "breakdown": {
+        "property": 5479103,
+        "sales_general": 5675659,
+        "sales_selective": 1586247,
+        "income_individual": 4508019,
+        "income_corporate": 1561519,
+        "licenses": 567322,
+        "other": 80433
+      },
+      "perCapitaTotal": 6.62
+    },
+    {
+      "state": "New Mexico",
+      "population": 2114371,
+      "totalRevenue": 18958712,
+      "breakdown": {
+        "property": 2610574,
+        "sales_general": 6159251,
+        "sales_selective": 1225313,
+        "income_individual": 2646300,
+        "income_corporate": 444335,
+        "licenses": 446426,
+        "other": 5426513
+      },
+      "perCapitaTotal": 8.97
+    },
+    {
+      "state": "Arkansas",
+      "population": 3067732,
+      "totalRevenue": 16218030,
+      "breakdown": {
+        "property": 2756068,
+        "sales_general": 6762780,
+        "sales_selective": 1983354,
+        "income_individual": 3147770,
+        "income_corporate": 838161,
+        "licenses": 480493,
+        "other": 249404
+      },
+      "perCapitaTotal": 5.29
+    },
+    {
+      "state": "Mississippi",
+      "population": 2939690,
+      "totalRevenue": 14323425,
+      "breakdown": {
+        "property": 3783788,
+        "sales_general": 5022568,
+        "sales_selective": 1696520,
+        "income_individual": 2412412,
+        "income_corporate": 818357,
+        "licenses": 513749,
+        "other": 76031
+      },
+      "perCapitaTotal": 4.87
+    },
+    {
+      "state": "Hawaii",
+      "population": 1435138,
+      "totalRevenue": 14060111,
+      "breakdown": {
+        "property": 2538799,
+        "sales_general": 5266641,
+        "sales_selective": 1985629,
+        "income_individual": 3099978,
+        "income_corporate": 347800,
+        "licenses": 671049,
+        "other": 150215
+      },
+      "perCapitaTotal": 9.8
+    },
+    {
+      "state": "Nebraska",
+      "population": 1978379,
+      "totalRevenue": 13120853,
+      "breakdown": {
+        "property": 4581200,
+        "sales_general": 3264932,
+        "sales_selective": 744049,
+        "income_individual": 3005952,
+        "income_corporate": 692965,
+        "licenses": 551028,
+        "other": 280727
+      },
+      "perCapitaTotal": 6.63
+    },
+    {
+      "state": "West Virginia",
+      "population": 1770071,
+      "totalRevenue": 10119910,
+      "breakdown": {
+        "property": 1965354,
+        "sales_general": 1929746,
+        "sales_selective": 1748865,
+        "income_individual": 2693568,
+        "income_corporate": 419965,
+        "licenses": 453106,
+        "other": 909306
+      },
+      "perCapitaTotal": 5.72
+    },
+    {
+      "state": "Maine",
+      "population": 1395722,
+      "totalRevenue": 10074010,
+      "breakdown": {
+        "property": 3615607,
+        "sales_general": 2263676,
+        "sales_selective": 806266,
+        "income_individual": 2481964,
+        "income_corporate": 451211,
+        "licenses": 360378,
+        "other": 94908
+      },
+      "perCapitaTotal": 7.22
+    },
+    {
+      "state": "Idaho",
+      "population": 1964726,
+      "totalRevenue": 9812252,
+      "breakdown": {
+        "property": 2236193,
+        "sales_general": 3090471,
+        "sales_selective": 751905,
+        "income_individual": 2141870,
+        "income_corporate": 1034310,
+        "licenses": 545383,
+        "other": 12120
+      },
+      "perCapitaTotal": 4.99
+    },
+    {
+      "state": "New Hampshire",
+      "population": 1402054,
+      "totalRevenue": 8094094,
+      "breakdown": {
+        "property": 4813242,
+        "sales_selective": 1011667,
+        "income_individual": 149485,
+        "income_corporate": 1271550,
+        "licenses": 639349,
+        "other": 208801
+      },
+      "perCapitaTotal": 5.77
+    },
+    {
+      "state": "Delaware",
+      "population": 1031890,
+      "totalRevenue": 7930210,
+      "breakdown": {
+        "property": 1117746,
+        "sales_selective": 657656,
+        "income_individual": 2425836,
+        "income_corporate": 579096,
+        "licenses": 2690564,
+        "other": 459312
+      },
+      "perCapitaTotal": 7.69
+    },
+    {
+      "state": "North Dakota",
+      "population": 783926,
+      "totalRevenue": 7720205,
+      "breakdown": {
+        "property": 1261659,
+        "sales_general": 1612875,
+        "sales_selective": 593739,
+        "income_individual": 495437,
+        "income_corporate": 324144,
+        "licenses": 262053,
+        "other": 3170298
+      },
+      "perCapitaTotal": 9.85
+    },
+    {
+      "state": "Rhode Island",
+      "population": 1095962,
+      "totalRevenue": 7535052,
+      "breakdown": {
+        "property": 2743766,
+        "sales_general": 1560600,
+        "sales_selective": 1034229,
+        "income_individual": 1611789,
+        "income_corporate": 262600,
+        "licenses": 227999,
+        "other": 94069
+      },
+      "perCapitaTotal": 6.88
+    },
+    {
+      "state": "Montana",
+      "population": 1132812,
+      "totalRevenue": 6614026,
+      "breakdown": {
+        "property": 2275360,
+        "sales_selective": 896746,
+        "income_individual": 2286844,
+        "income_corporate": 307950,
+        "licenses": 555975,
+        "other": 291151
+      },
+      "perCapitaTotal": 5.84
+    },
+    {
+      "state": "Alaska",
+      "population": 733406,
+      "totalRevenue": 5523043,
+      "breakdown": {
+        "property": 1770571,
+        "sales_general": 353696,
+        "sales_selective": 498297,
+        "income_corporate": 444240,
+        "licenses": 158106,
+        "other": 2298133
+      },
+      "perCapitaTotal": 7.53
+    },
+    {
+      "state": "Vermont",
+      "population": 647464,
+      "totalRevenue": 5487007,
+      "breakdown": {
+        "property": 2152614,
+        "sales_general": 606716,
+        "sales_selective": 918608,
+        "income_individual": 1210585,
+        "income_corporate": 299607,
+        "licenses": 160941,
+        "other": 137936
+      },
+      "perCapitaTotal": 8.47
+    },
+    {
+      "state": "South Dakota",
+      "population": 919318,
+      "totalRevenue": 4842491,
+      "breakdown": {
+        "property": 1576730,
+        "sales_general": 2169732,
+        "sales_selective": 596075,
+        "income_corporate": 48070,
+        "licenses": 430746,
+        "other": 21138
+      },
+      "perCapitaTotal": 5.27
+    },
+    {
+      "state": "Wyoming",
+      "population": 584057,
+      "totalRevenue": 4689639,
+      "breakdown": {
+        "property": 1663792,
+        "sales_general": 1375693,
+        "sales_selective": 217838,
+        "licenses": 266016,
+        "other": 1166300
+      },
+      "perCapitaTotal": 8.03
     }
   ]
 }

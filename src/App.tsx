@@ -136,8 +136,14 @@ function App() {
     <main className="page">
       <section className="hero">
         <h1>State + Local Tax Comparison</h1>
+        <p className="hero-subtitle">
+          Discussed at{' '}
+          <a href="https://techcanbebetter.com" target="_blank" rel="noreferrer">
+            techcanbebetter.com
+          </a>
+        </p>
         <p>
-          One-year nominal-dollar comparison for the 20 most populous states, including total tax revenue
+          One-year nominal-dollar comparison across all 50 states, including total tax revenue
           and per-capita views.
         </p>
       </section>

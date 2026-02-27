@@ -1,6 +1,6 @@
 {
   "year": 2023,
-  "topNStates": 20,
+  "topNStates": 50,
   "input": {
     "taxByTypeCsv": "data/raw/state-local-tax-by-type.csv",
     "populationCsv": "data/raw/state-population.csv"
