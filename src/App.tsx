@@ -67,7 +67,8 @@ function App() {
 
   useEffect(() => {
     const loadData = async () => {
-      const candidates = ['/data/state-tax-summary-2023.json', '/data/state-tax-summary-sample.json']
+      const base = import.meta.env.BASE_URL
+      const candidates = [`${base}data/state-tax-summary-2023.json`, `${base}data/state-tax-summary-sample.json`]
 
       for (const url of candidates) {
         try {
