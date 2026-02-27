@@ -1,0 +1,320 @@
+import { useEffect, useMemo, useState } from 'react'
+import './App.css'
+
+type TaxType = {
+  key: string
+  label: string
+}
+
+type StateRecord = {
+  state: string
+  population: number
+  totalRevenue: number
+  perCapitaTotal: number
+  breakdown: Record<string, number>
+}
+
+type DataPayload = {
+  metadata: {
+    year: number
+    currency: string
+    scope: string
+    topN: number
+    generatedAt?: string
+    notes?: string[]
+  }
+  taxTypes: TaxType[]
+  states: StateRecord[]
+}
+
+const currencyFormatter = new Intl.NumberFormat('en-US', {
+  style: 'currency',
+  currency: 'USD',
+  maximumFractionDigits: 0,
+})
+
+const numberFormatter = new Intl.NumberFormat('en-US')
+
+const dateTimeFormatter = new Intl.DateTimeFormat('en-US', {
+  dateStyle: 'medium',
+  timeStyle: 'short',
+})
+
+// Revenue values are stored in thousands of dollars (Census Bureau native unit).
+// Multiply by 1 000 before display, then abbreviate.
+const compactCurrency = (thousands: number): string => {
+  const dollars = thousands * 1000
+  if (dollars >= 1e9) return `$${(dollars / 1e9).toFixed(1)}B`
+  if (dollars >= 1e6) return `$${(dollars / 1e6).toFixed(1)}M`
+  return currencyFormatter.format(dollars)
+}
+
+const TAX_COLORS: Record<string, string> = {
+  property: '#2563eb',
+  sales_general: '#059669',
+  sales_selective: '#34d399',
+  income_individual: '#d97706',
+  income_corporate: '#fbbf24',
+  licenses: '#7c3aed',
+  other: '#9ca3af',
+}
+
+function App() {
+  const [data, setData] = useState<DataPayload | null>(null)
+  const [error, setError] = useState<string | null>(null)
+  const [metric, setMetric] = useState<'total' | 'perCapita'>('total')
+  const [hoveredState, setHoveredState] = useState<string | null>(null)
+
+  useEffect(() => {
+    const loadData = async () => {
+      const candidates = ['/data/state-tax-summary-2023.json', '/data/state-tax-summary-sample.json']
+
+      for (const url of candidates) {
+        try {
+          const response = await fetch(url)
+          if (!response.ok) {
+            continue
+          }
+
+          const payload = (await response.json()) as DataPayload
+          setData(payload)
+          setError(null)
+          return
+        } catch {
+          continue
+        }
+      }
+
+      setError('No processed dataset found yet. Run `npm run data:ingest` after adding source CSV files.')
+    }
+
+    void loadData()
+  }, [])
+
+  const sortedStates = useMemo(() => {
+    if (!data) {
+      return []
+    }
+
+    return [...data.states].sort((a, b) => {
+      if (metric === 'total') {
+        return b.totalRevenue - a.totalRevenue
+      }
+
+      return b.perCapitaTotal - a.perCapitaTotal
+    })
+  }, [data, metric])
+
+  const maxMetricValue = useMemo(() => {
+    if (sortedStates.length === 0) {
+      return 0
+    }
+
+    return metric === 'total'
+      ? Math.max(...sortedStates.map((entry) => entry.totalRevenue))
+      : Math.max(...sortedStates.map((entry) => entry.perCapitaTotal))
+  }, [metric, sortedStates])
+
+  const topState = sortedStates[0]
+
+  const lastRefreshedLabel = useMemo(() => {
+    const raw = data?.metadata.generatedAt
+    if (!raw) {
+      return '—'
+    }
+
+    const parsed = new Date(raw)
+    if (Number.isNaN(parsed.getTime())) {
+      return '—'
+    }
+
+    return dateTimeFormatter.format(parsed)
+  }, [data])
+
+  return (
+    <main className="page">
+      <section className="hero">
+        <h1>State + Local Tax Comparison</h1>
+        <p>
+          One-year nominal-dollar comparison for the 20 most populous states, including total tax revenue
+          and per-capita views.
+        </p>
+      </section>
+
+{error && <section className="error">{error}</section>}
+
+      {data && (
+        <>
+          <section className="summary-grid">
+            <article className="summary-card">
+              <h2>Year</h2>
+              <p>{data.metadata.year}</p>
+            </article>
+            <article className="summary-card">
+              <h2>Coverage</h2>
+              <p>Top {data.metadata.topN} states</p>
+            </article>
+            <article className="summary-card">
+              <h2>Top state ({metric === 'total' ? 'Total' : 'Per capita'})</h2>
+              <p>{topState?.state ?? '—'}</p>
+            </article>
+            <article className="summary-card">
+              <h2>Last refreshed</h2>
+              <p>{lastRefreshedLabel}</p>
+            </article>
+          </section>
+
+          <section className="panel">
+            <div className="panel-header">
+              <h2>Compare totals across states</h2>
+              <div className="metric-toggle" role="group" aria-label="Metric toggle">
+                <button
+                  className={metric === 'total' ? 'active' : ''}
+                  onClick={() => setMetric('total')}
+                  type="button"
+                >
+                  Total
+                </button>
+                <button
+                  className={metric === 'perCapita' ? 'active' : ''}
+                  onClick={() => setMetric('perCapita')}
+                  type="button"
+                >
+                  Per capita
+                </button>
+              </div>
+            </div>
+
+            <div className="bar-list">
+              {sortedStates.map((entry) => {
+                const rawValue = metric === 'total' ? entry.totalRevenue : entry.perCapitaTotal
+                // perCapitaTotal is stored in thousands (Census Bureau units); multiply to get actual dollars
+                const displayValue = metric === 'perCapita' ? rawValue * 1000 : rawValue
+
+                return (
+                  <article
+                    key={entry.state}
+                    className="bar-row"
+                    onMouseEnter={() => setHoveredState(entry.state)}
+                    onMouseLeave={() => setHoveredState(null)}
+                  >
+                    <header>
+                      <h3>{entry.state}</h3>
+                      <p>
+                        {metric === 'total'
+                          ? compactCurrency(displayValue)
+                          : `${currencyFormatter.format(displayValue)} / resident`}
+                      </p>
+                    </header>
+                    <div className="bar-track">
+                      {data.taxTypes.map((taxType) => {
+                        const breakdownRaw = entry.breakdown[taxType.key] ?? 0
+                        const segmentRaw = metric === 'total' ? breakdownRaw : breakdownRaw / entry.population
+                        const segmentWidth = maxMetricValue === 0 ? 0 : (segmentRaw / maxMetricValue) * 100
+                        return (
+                          <div
+                            key={taxType.key}
+                            className="bar-segment"
+                            style={{ width: `${segmentWidth}%`, background: TAX_COLORS[taxType.key] ?? '#9ca3af' }}
+                          />
+                        )
+                      })}
+                    </div>
+                    {hoveredState === entry.state && (
+                      <div className="bar-tooltip">
+                        {data.taxTypes.map((taxType) => {
+                          const breakdownRaw = entry.breakdown[taxType.key] ?? 0
+                          const tooltipValue =
+                            metric === 'total'
+                              ? compactCurrency(breakdownRaw)
+                              : `${currencyFormatter.format((breakdownRaw / entry.population) * 1000)} / resident`
+                          return (
+                            <div key={taxType.key} className="tooltip-row">
+                              <span className="tooltip-swatch" style={{ background: TAX_COLORS[taxType.key] ?? '#9ca3af' }} />
+                              <span className="tooltip-label">{taxType.label}</span>
+                              <span className="tooltip-value">{tooltipValue}</span>
+                            </div>
+                          )
+                        })}
+                      </div>
+                    )}
+                  </article>
+                )
+              })}
+            </div>
+
+            <div className="tax-legend">
+              {data.taxTypes.map((taxType) => (
+                <span key={taxType.key} className="legend-item">
+                  <span className="legend-swatch" style={{ background: TAX_COLORS[taxType.key] ?? '#9ca3af' }} />
+                  {taxType.label}
+                </span>
+              ))}
+            </div>
+          </section>
+
+          <section className="panel">
+            <h2>Breakout by tax type</h2>
+            <div className="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>State</th>
+                    {data.taxTypes.map((taxType) => (
+                      <th key={taxType.key}>{taxType.label}</th>
+                    ))}
+                    <th>Total</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {sortedStates.map((entry) => (
+                    <tr key={entry.state}>
+                      <td>{entry.state}</td>
+                      {data.taxTypes.map((taxType) => (
+                        <td key={taxType.key}>{currencyFormatter.format(entry.breakdown[taxType.key] ?? 0)}</td>
+                      ))}
+                      <td>{currencyFormatter.format(entry.totalRevenue)}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <p className="panel-footnote">
+              Population shown in source data and per-capita calculations use nominal dollars. Example: {topState?.state}{' '}
+              population {topState ? numberFormatter.format(topState.population) : '—'}.
+            </p>
+          </section>
+
+          <section className="panel sources-panel">
+            <h2>Data Sources</h2>
+            <p className="sources-meta">
+              Source year: {data.metadata.year} · Last refreshed: {lastRefreshedLabel}
+            </p>
+            <ul className="sources-list">
+              <li>
+                <a
+                  href="https://api.census.gov/data/timeseries/govs?get=NAME,GOVTYPE,GOVTYPE_LABEL,AGG_DESC,AGG_DESC_LABEL,AMOUNT,YEAR&for=state:*&time=2023&SVY_COMP=04"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  U.S. Census Bureau — Annual Survey of State and Local Finance (state + local by level)
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://www2.census.gov/programs-surveys/popest/datasets/2020-2023/state/totals/NST-EST2023-ALLDATA.csv"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  U.S. Census Bureau — State Population Estimates (2023)
+                </a>
+              </li>
+            </ul>
+          </section>
+        </>
+      )}
+    </main>
+  )
+}
+
+export default App

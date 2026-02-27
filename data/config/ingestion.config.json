@@ -1,0 +1,43 @@
+{
+  "year": 2023,
+  "topNStates": 20,
+  "input": {
+    "taxByTypeCsv": "data/raw/state-local-tax-by-type.csv",
+    "populationCsv": "data/raw/state-population.csv"
+  },
+  "columns": {
+    "tax": {
+      "state": "state",
+      "year": "year",
+      "taxType": "tax_type",
+      "stateTaxRevenue": "state_tax_revenue",
+      "localTaxRevenue": "local_tax_revenue"
+    },
+    "population": {
+      "state": "state",
+      "year": "year",
+      "population": "population"
+    }
+  },
+  "taxTypeMap": {
+    "Individual income tax": "income_individual",
+    "Corporate income tax": "income_corporate",
+    "General sales tax": "sales_general",
+    "Selective sales tax": "sales_selective",
+    "Property tax": "property",
+    "License tax": "licenses",
+    "Other tax": "other"
+  },
+  "taxTypeLabels": {
+    "income_individual": "Individual income",
+    "income_corporate": "Corporate income",
+    "sales_general": "General sales",
+    "sales_selective": "Selective sales",
+    "property": "Property",
+    "licenses": "Licenses",
+    "other": "Other"
+  },
+  "output": {
+    "json": "public/data/state-tax-summary-2023.json"
+  }
+}
